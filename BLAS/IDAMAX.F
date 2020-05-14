@@ -1,0 +1,40 @@
+      INTEGER(KIND=IP) FUNCTION IDAMAX(N,DX,INCX)
+      IMPLICIT NONE
+      DOUBLE PRECISION, INTENT(IN) :: DX(*)
+      INTEGER(KIND=IP), INTENT(IN) :: N, INCX
+C
+      INTEGER(KIND=IP) :: I, IX
+      DOUBLE PRECISION :: RMAX
+C
+C     FINDS THE INDEX OF ELEMENT HAVING MAX. ABSOLUTE VALUE.
+C     JACK DONGARRA, LINPACK, 3/11/78.
+C
+      IDAMAX = 0
+      IF( N .LT. 1 ) RETURN
+      IDAMAX = 1
+      IF(N.EQ.1) RETURN
+      IF(INCX.EQ.1)GO TO 20
+C
+C        CODE FOR INCREMENT NOT EQUAL TO 1
+C
+      IX = 1
+      RMAX = ABS(DX(1))
+      IX = IX + INCX
+      DO 10 I = 2,N
+         IF(ABS(DX(IX)).LE.RMAX) GO TO 5
+         IDAMAX = I
+         RMAX = ABS(DX(IX))
+    5    IX = IX + INCX
+   10 CONTINUE
+      RETURN
+C
+C        CODE FOR INCREMENT EQUAL TO 1
+C
+   20 RMAX = ABS(DX(1))
+      DO 30 I = 2,N
+         IF(ABS(DX(I)).LE.RMAX) GO TO 30
+         IDAMAX = I
+         RMAX = ABS(DX(I))
+   30 CONTINUE
+      RETURN
+      END

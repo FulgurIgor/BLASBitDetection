@@ -4,7 +4,9 @@ project(DDOT_BLAS)
 enable_language(Fortran)
 
 set(SOURCES
-DDOT.F)
+DDOT.F
+IDAMAX.F
+)
 
 if(USE_STATIC)
   add_library(${PROJECT_NAME}32-${LIBRARY_TYPE} STATIC ${SOURCES})
