@@ -8,6 +8,9 @@ set(SOURCES
 src/main.F90
 )
 
+option(USE_STATIC "Build static DDOT_BLAS library" OFF)
+message(STATUS "Build static DDOT_BLAS library: " ${USE_STATIC})
+
 if(USE_STATIC)
   set(LIBRARY_TYPE "static")
 else()
