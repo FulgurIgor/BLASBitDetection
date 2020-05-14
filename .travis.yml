@@ -5,52 +5,67 @@ matrix:
   - os: linux
     dist: trusty
     env:
-    - USE_BLAS=ON
+    - MATH=BLAS
     sudo: required
   - os: linux
     dist: trusty
     env:
-    - USE_BLAS=OFF
+    - MATH=ATLAS
+    sudo: required
+  - os: linux
+    dist: trusty
+    env:
+    - MATH=NONE
     - USE_STATIC=ON
     sudo: required
   - os: linux
     dist: trusty
     env:
-    - USE_BLAS=OFF
+    - MATH=NONE
     - USE_STATIC=OFF
     sudo: required
   - os: linux
     dist: xenial
     env:
-    - USE_BLAS=ON
+    - MATH=BLAS
     sudo: required
   - os: linux
     dist: xenial
     env:
-    - USE_BLAS=OFF
+    - MATH=ATLAS
+    sudo: required
+  - os: linux
+    dist: xenial
+    env:
+    - MATH=NONE
     - USE_STATIC=ON
     sudo: required
   - os: linux
     dist: xenial
     env:
-    - USE_BLAS=OFF
+    - MATH=NONE
     - USE_STATIC=OFF
     sudo: required
   - os: linux
     dist: bionic
     env:
-    - USE_BLAS=ON
+    - MATH=BLAS
     sudo: required
   - os: linux
     dist: bionic
     env:
-    - USE_BLAS=OFF
+    - MATH=ATLAS
+    sudo: required
+  - os: linux
+    dist: bionic
+    env:
+    - MATH=NONE
     - USE_STATIC=ON
     sudo: required
   - os: linux
     dist: bionic
     env:
-    - USE_BLAS=OFF
+    - MATH=NONE
     - USE_STATIC=OFF
     sudo: required
 
@@ -58,9 +73,13 @@ before_install:
 - sudo apt-get -qq install -y gfortran
 - sudo apt-get -qq install -y make
 - sudo apt-get -qq install -y cmake
-- if [ "$USE_BLAS" = "ON" ]; then sudo apt-get -qq install -y libatlas-base-dev
-    ; sudo apt-get -qq install -y libblas-dev
+- if [ "$MATH" = "BLAS" ]; then sudo apt-get -qq install -y libblas-dev
+  ; export USE_BLAS=ON
   ; fi
+- if [ "$MATH" = "ATLAS" ]; then sudo apt-get -qq install -y libatlas-base-dev
+  ; export USE_BLAS=ON
+  ; fi
+- if [ "$MATH" = "NONE" ]; then export USE_BLAS=OFF ; fi
 - export FC=`which gfortran`
 - $FC --version
 
