@@ -3,7 +3,7 @@ matrix:
   fast_finish: true
   include:
   - os: linux
-    dist: xenial
+    dist: trusty
     env:
     - USE_BLAS=ON
     sudo: required
@@ -24,7 +24,7 @@ before_install:
 - sudo apt-get -qq install -y gfortran
 - sudo apt-get -qq install -y make
 - sudo apt-get -qq install -y cmake
-- if [ "$USE_BLAS" = "TRUE" ]; then sudo apt-get -qq install -y libatlas-base-dev
+- if [ "$USE_BLAS" = "ON" ]; then sudo apt-get -qq install -y libatlas-base-dev
     ; sudo apt-get -qq install -y libblas-dev
     ; sudo apt-get -qq install -y liblapack-dev
   ; fi
