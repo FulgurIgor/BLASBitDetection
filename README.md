@@ -5,9 +5,7 @@ This project is related to detection of contract incompability, when different v
 # Compilation
 
 ```
-cmake -H. -Bobjdir
+cmake -H. -Bobjdir -DUSE_STATIC=ON
 cd objdir
-make DDOT_BLAS32Shared
-make DDOT_BLAS64Shared
 make
 ```
