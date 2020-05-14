@@ -19,6 +19,8 @@ if(USE_BLAS)
 
   find_package(BLAS REQUIRED)
 
+  message(STATUS "BLAS LIBRARY: " ${BLAS_LIBRARIES})
+
   foreach(PROGRAM_BIT 32 64)
     math(EXPR IP "${PROGRAM_BIT} / 8")
     add_executable       (${PROJECT_NAME}${PROGRAM_BIT}_BLAS ${SOURCES})
