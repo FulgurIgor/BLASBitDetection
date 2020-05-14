@@ -24,10 +24,8 @@ before_install:
 - sudo apt-get -qq install -y gfortran
 - sudo apt-get -qq install -y make
 - sudo apt-get -qq install -y cmake
-- if [ "$USE_BLAS" = "TRUE" ]
-  ; then
-  ; sudo apt-get -qq install -y libatlas-base-dev
-  ; sudo apt-get -qq install -y libblas-dev
+- if [ "$USE_BLAS" = "TRUE" ]; then sudo apt-get -qq install -y libatlas-base-dev
+    ; sudo apt-get -qq install -y libblas-dev
   ; fi
 - export FC=`which gfortran`
 - $FC --version
@@ -37,9 +35,7 @@ script:
 - make -j$(nproc)
 
 after_success:
-- for i in BlasBit*
-  ; do
-  ; echo $i
-  ; ./$i
+- for i in BlasBit*; do echo $i
+    ; ./$i
   ; done
 - echo "DONE!"
