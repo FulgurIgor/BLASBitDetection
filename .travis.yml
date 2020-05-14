@@ -3,6 +3,23 @@ matrix:
   fast_finish: true
   include:
   - os: linux
+    dist: precise
+    env:
+    - USE_BLAS=ON
+    sudo: required
+  - os: linux
+    dist: precise
+    env:
+    - USE_BLAS=OFF
+    - USE_STATIC=ON
+    sudo: required
+  - os: linux
+    dist: precise
+    env:
+    - USE_BLAS=OFF
+    - USE_STATIC=OFF
+    sudo: required
+  - os: linux
     dist: trusty
     env:
     - USE_BLAS=ON
@@ -15,6 +32,40 @@ matrix:
     sudo: required
   - os: linux
     dist: trusty
+    env:
+    - USE_BLAS=OFF
+    - USE_STATIC=OFF
+    sudo: required
+  - os: linux
+    dist: xenial
+    env:
+    - USE_BLAS=ON
+    sudo: required
+  - os: linux
+    dist: xenial
+    env:
+    - USE_BLAS=OFF
+    - USE_STATIC=ON
+    sudo: required
+  - os: linux
+    dist: xenial
+    env:
+    - USE_BLAS=OFF
+    - USE_STATIC=OFF
+    sudo: required
+  - os: linux
+    dist: bionic
+    env:
+    - USE_BLAS=ON
+    sudo: required
+  - os: linux
+    dist: bionic
+    env:
+    - USE_BLAS=OFF
+    - USE_STATIC=ON
+    sudo: required
+  - os: linux
+    dist: bionic
     env:
     - USE_BLAS=OFF
     - USE_STATIC=OFF
