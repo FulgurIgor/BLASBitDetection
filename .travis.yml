@@ -26,7 +26,7 @@ before_install:
 - $FC --version
 - sudo apt-get -qq install -y make
 - sudo apt-get -qq install -y cmake
-- if [ "$USE_BLAS" = "TRUE" ] then sudo apt-get -qq install -y libblas-dev; fi
+- if [ "$USE_BLAS" = "TRUE" ]; then sudo apt-get -qq install -y libblas-dev ; fi
 
 script:
 - cmake . -DUSE_BLAS=${USE_BLAS} -DUSE_STATIC=${USE_STATIC}
