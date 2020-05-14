@@ -13,6 +13,7 @@ message(STATUS "Linking with BLAS or with DDOT_BLAS: " ${USE_BLAS})
 
 if("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "GNU")
   set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fno-backtrace")
+  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fno-range-check")
 endif()
 
 if(USE_BLAS)
