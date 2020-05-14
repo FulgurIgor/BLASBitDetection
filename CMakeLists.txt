@@ -11,6 +11,10 @@ src/main.F90
 option(USE_BLAS "Linking with BLAS or with DDOT_BLAS" OFF)
 message(STATUS "Linking with BLAS or with DDOT_BLAS: " ${USE_BLAS})
 
+if("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "GNU")
+  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fno-backtrace")
+endif()
+
 if(USE_BLAS)
 
   find_package(BLAS REQUIRED)
