@@ -6,20 +6,16 @@ enable_language(Fortran)
 set(SOURCES
 DDOT.F)
 
-add_library(${PROJECT_NAME}32-static STATIC ${SOURCES})
-add_library(${PROJECT_NAME}32-shared SHARED ${SOURCES})
+if(USE_STATIC)
+  add_library(${PROJECT_NAME}32-${LIBRARY_TYPE} STATIC ${SOURCES})
+  add_library(${PROJECT_NAME}64-${LIBRARY_TYPE} STATIC ${SOURCES})
+else()
+  add_library(${PROJECT_NAME}32-${LIBRARY_TYPE} SHARED ${SOURCES})
+  add_library(${PROJECT_NAME}64-${LIBRARY_TYPE} SHARED ${SOURCES})
+endif()
 
-set_target_properties(${PROJECT_NAME}32-static PROPERTIES COMPILE_FLAGS "-DIP=4")
-set_target_properties(${PROJECT_NAME}32-shared PROPERTIES COMPILE_FLAGS "-DIP=4")
+set_target_properties(${PROJECT_NAME}32-${LIBRARY_TYPE} PROPERTIES COMPILE_FLAGS "-DIP=4")
+set_target_properties(${PROJECT_NAME}32-${LIBRARY_TYPE} PROPERTIES OUTPUT_NAME ${PROJECT_NAME}32)
 
-set_target_properties(${PROJECT_NAME}32-static PROPERTIES OUTPUT_NAME ${PROJECT_NAME}32)
-set_target_properties(${PROJECT_NAME}32-shared PROPERTIES OUTPUT_NAME ${PROJECT_NAME}32)
-
-add_library(${PROJECT_NAME}64-static STATIC ${SOURCES})
-add_library(${PROJECT_NAME}64-shared SHARED ${SOURCES})
-
-set_target_properties(${PROJECT_NAME}64-static PROPERTIES COMPILE_FLAGS "-DIP=8")
-set_target_properties(${PROJECT_NAME}64-shared PROPERTIES COMPILE_FLAGS "-DIP=8")
-
-set_target_properties(${PROJECT_NAME}64-static PROPERTIES OUTPUT_NAME ${PROJECT_NAME}64)
-set_target_properties(${PROJECT_NAME}64-shared PROPERTIES OUTPUT_NAME ${PROJECT_NAME}64)
+set_target_properties(${PROJECT_NAME}64-${LIBRARY_TYPE} PROPERTIES COMPILE_FLAGS "-DIP=8")
+set_target_properties(${PROJECT_NAME}64-${LIBRARY_TYPE} PROPERTIES OUTPUT_NAME ${PROJECT_NAME}64)
