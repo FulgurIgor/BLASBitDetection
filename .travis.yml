@@ -26,7 +26,6 @@ before_install:
 - sudo apt-get -qq install -y cmake
 - if [ "$USE_BLAS" = "ON" ]; then sudo apt-get -qq install -y libatlas-base-dev
     ; sudo apt-get -qq install -y libblas-dev
-    ; sudo apt-get -qq install -y liblapack-dev
   ; fi
 - export FC=`which gfortran`
 - $FC --version
