@@ -21,17 +21,11 @@ matrix:
     sudo: required
 
 before_install:
-- 'travis_fold:start:gfortran'
 - sudo apt-get -qq install -y gfortran
 - export FC=`which gfortran`
 - $FC --version
-- 'travis_fold:end:gfortran'
-- ''
-- 'travis_fold:start:build_system'
 - sudo apt-get -qq install -y make
 - sudo apt-get -qq install -y cmake
-- 'travis_fold:end:build_system'
-- ''
 - if [ "$USE_BLAS" = "TRUE" ] then sudo apt-get -qq install -y libblas-dev; fi
 
 script:
