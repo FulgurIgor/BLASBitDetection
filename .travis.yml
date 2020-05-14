@@ -1,0 +1,43 @@
+language: c
+matrix:
+  fast_finish: true
+  include:
+  - os: linux
+    dist: trusty
+    env:
+    - USE_BLAS=ON
+    sudo: required
+  - os: linux
+    dist: trusty
+    env:
+    - USE_BLAS=OFF
+    - USE_STATIC=ON
+    sudo: required
+  - os: linux
+    dist: trusty
+    env:
+    - USE_BLAS=OFF
+    - USE_STATIC=OFF
+    sudo: required
+
+before_install:
+- 'travis_fold:start:gfortran'
+- sudo apt-get -qq install -y gfortran
+- export FC=`which gfortran`
+- $FC --version
+- 'travis_fold:end:gfortran'
+- ''
+- 'travis_fold:start:build_system'
+- sudo apt-get -qq install -y make
+- sudo apt-get -qq install -y cmake
+- 'travis_fold:end:build_system'
+- ''
+- if [ "$USE_BLAS" = "TRUE" ] then sudo apt-get -qq install -y libblas-dev; fi
+
+script:
+- cmake . -DUSE_BLAS=${USE_BLAS} -DUSE_STATIC=${USE_STATIC}
+- make -j$(nproc)
+
+after_success:
+- for i in BlasBit*; do ./$i; done
+- echo "DONE!"
