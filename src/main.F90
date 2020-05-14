@@ -5,7 +5,7 @@ program main
     ! IDAMAX function from BLAS
     integer(kind=IP) IDAMAX
     ! size of double precision array
-    integer(kind=IP), parameter :: N = 3, STEP = 1
+    integer(kind=IP), parameter :: N = 3, STEP = 4294967296
     ! array
     double precision :: A(N), B(N)
     ! dot product
